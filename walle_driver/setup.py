@@ -15,13 +15,13 @@ setup(
     zip_safe=True,
     maintainer='jannoszczyk',
     maintainer_email='panainz@gmail.com',
-    description='Examples of minimal publisher/subscriber using rclpy',
+    description='Robot Drivers',
     license='Apache License 2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'talker = walle_driver.publisher_member_function:main',
-            'listener = walle_driver.subscriber_member_function:main',
+            'talker = walle_driver.position_publisher:main',
+            'listener = walle_driver.position_subscriber:main',
         ],
     },
 )

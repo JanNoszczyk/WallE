@@ -3,7 +3,7 @@
 <package format="3">
   <name>walle_driver</name>
   <version>0.0.0</version>
-  <description>Examples of minimal publisher/subscriber using rclpy</description>
+  <description>Robot Drivers</description>
   <maintainer email="panainz@gmail.com">jannoszczyk</maintainer>
   <license>Apache License 2.0</license>
 
