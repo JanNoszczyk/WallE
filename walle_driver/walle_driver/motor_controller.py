@@ -38,7 +38,7 @@ class Motor:
         self.bus.write_pin(self.inB, 0)
 
 
-class WallE:
+class MotorController:
     def __init__(self):
         self.enA = 17
         self.in1, self.in2 = 5, 3
@@ -54,9 +54,6 @@ class WallE:
         
 
     def set_speeds(self, power_left, power_right):
-        power_left = (power_left)
-        power_right = (power_right)
-
         if power_left < 0:
             self.motor_left.backward(-power_left)
         else:
