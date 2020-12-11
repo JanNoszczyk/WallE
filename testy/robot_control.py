@@ -40,7 +40,8 @@ try:
                     x_axis, y_axis = joystick['lx', 'ly']
                     # Get power from mixer function
                     power_left, power_right = mixer(yaw=x_axis, throttle=y_axis)
-
+                    print(power_left, power_right)
+                    sleep(0.1)
                     walle.set_speeds(power_left, power_right)
 
                     joystick.check_presses()
