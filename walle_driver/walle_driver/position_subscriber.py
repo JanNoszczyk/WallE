@@ -1,12 +1,12 @@
 import rclpy
 from rclpy.node import Node
-from robot import WallE
+from motor_controller import MotorController
 from walle_msgs.msg import MotorPower
 
 
 class PositionSubscriber(Node):
 
-    def __init__(self, walle):
+    def __init__(self, motors):
         super().__init__('position_subscriber')
         self.subscription = self.create_subscription(
             MotorPower,
@@ -14,11 +14,11 @@ class PositionSubscriber(Node):
             self.listener_callback,
             10)
         self.subscription  # prevent unused variable warning
-        self.walle = walle
+        self.motors = motors
 
     def listener_callback(self, msg):
 
-        self.walle.set_speeds(msg.left, msg.right)
+        self.motors.set_speeds(msg.left, msg.right)
 
         self.get_logger().info("I heard: {} {}".format(msg.left, msg.right))
 
@@ -26,8 +26,8 @@ class PositionSubscriber(Node):
 def main(args=None):
     rclpy.init(args=args)
     
-    walle = WallE()
-    position_subscriber = PositionSubscriber(walle)
+    motors = MotorController()
+    position_subscriber = PositionSubscriber(motors)
 
     rclpy.spin(position_subscriber)
 
