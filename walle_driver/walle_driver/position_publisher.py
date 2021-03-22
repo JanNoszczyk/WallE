@@ -28,8 +28,7 @@ class PositionPublisher(Node):
         self.joystick.check_presses()
         if 'home' in self.joystick.presses:
             raise RobotStopException()
-        
-        self.get_logger().info("X, Y: {} {}".format(x_axis, y_axis))
+    
         self.get_logger().info("Publishing: {} {}".format(msg.left, msg.right))
 
     def mixer(self, yaw, throttle, max_power=100):
