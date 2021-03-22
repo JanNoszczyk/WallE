@@ -1,6 +1,6 @@
 import rclpy
 from rclpy.node import Node
-from motor_controller import MotorController
+from walle_driver.motor_controller import MotorController
 from walle_msgs.msg import MotorPower
 
 

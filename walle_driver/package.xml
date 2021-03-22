@@ -21,5 +21,6 @@
     <exec_depend>RPi</exec_depend>
     <exec_depend>IOPi</exec_depend>
     <exec_depend>approxeng</exec_depend>
+    <exec_depend>walle_driver.motor_controller</exec_depend>
   </export>
 </package>
