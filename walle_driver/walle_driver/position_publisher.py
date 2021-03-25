@@ -1,6 +1,7 @@
 import rclpy
 from rclpy.node import Node
 from time import sleep
+import math
 from approxeng.input.selectbinder import ControllerResource
 from walle_msgs.msg import MotorPower
 
@@ -18,9 +19,9 @@ class PositionPublisher(Node):
         msg = MotorPower()
 
         # Get joystick values from the left analogue stick
-        x_axis, y_axis = self.joystick['lx', 'ly']
+        x_axis, y_axis = self.joystick['lx', 'ry']
         # Get power from mixer function
-        power_left, power_right = self.mixer(yaw=x_axis, throttle=y_axis)
+        power_left, power_right = self.steering(x=y_axis, y=x_axis)
         msg.left = power_left
         msg.right = power_right
         self.publisher_.publish(msg)
@@ -37,6 +38,28 @@ class PositionPublisher(Node):
         scale = float(max_power) / max(1, abs(left), abs(right))
 
         return float(left * scale), float(right * scale)
+    
+    def steering(self, x, y, max_power=100):
+        # convert to polar
+        r = math.hypot(x, -y)
+        t = math.atan2(-y, x)
+
+        # rotate by 45 degrees
+        t += math.pi / 4
+
+        # back to cartesian
+        left = r * math.cos(t)
+        right = r * math.sin(t)
+
+        # rescale the new coords
+        left = left * math.sqrt(2)
+        right = right * math.sqrt(2)
+
+        # clamp to -1/+1
+        left = max(-1, min(left, 1))
+        right = max(-1, min(right, 1))
+
+        return float(max_power*left), float(max_power*right)
 
 
 def main(args=None):

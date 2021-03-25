@@ -38,11 +38,11 @@ try:
                 print(joystick.controls)
                 while joystick.connected:
                     # Get joystick values from the left analogue stick
-                    x_axis, y_axis = joystick['lx', 'ly']
+                    x_axis, y_axis = joystick['rx', 'ry']
                     # Get power from mixer function
                     power_left, power_right = mixer(yaw=x_axis, throttle=y_axis)
-                    print(power_left, power_right)
-                    sleep(0.1)
+                    # print(power_left, power_right)
+                    sleep(0.2)
                     walle.set_speeds(power_left, power_right)
 
                     joystick.check_presses()
